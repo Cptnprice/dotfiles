@@ -5,6 +5,7 @@ CHECK_BINDING="$SCRIPT_DIR/../utils/checkKeyboardBindingExistence.sh"
 
 SHORTCUTS=(
     "Firefox|firefox|<Super>b"
+    "File Manager|nautilus|<Super>e"
 )
 
 set_shortcuts() {

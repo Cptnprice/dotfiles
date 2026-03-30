@@ -70,7 +70,7 @@ for schema in "${SCHEMAS[@]}"; do
 
     while IFS= read -r key; do
         value=$(gsettings get "$schema" "$key" 2>/dev/null)
-        if echo "$value" | grep -qi "$NORMALIZED"; then
+        if echo "$value" | grep -qi "'${NORMALIZED}'"; then
             warn "[built-in]  $schema"
             warn "            key: $key"
             warn "            value: $value"
@@ -86,7 +86,7 @@ CUSTOM_PATHS=$(gsettings get org.gnome.settings-daemon.plugins.media-keys custom
 for path in $CUSTOM_PATHS; do
     [[ -z "$path" ]] && continue
     binding=$(gsettings get "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$path" binding 2>/dev/null)
-    if echo "$binding" | grep -qi "$NORMALIZED"; then
+    if echo "$binding" | grep -qi "'${NORMALIZED}'"; then
         name=$(gsettings get "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$path" name 2>/dev/null)
         command=$(gsettings get "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$path" command 2>/dev/null)
         warn "[custom]    $name"
@@ -97,7 +97,7 @@ for path in $CUSTOM_PATHS; do
     fi
 done
 
-DCONF_HITS=$(dconf dump / 2>/dev/null | grep -i "$NORMALIZED")
+DCONF_HITS=$(dconf dump / 2>/dev/null | grep -i "'${NORMALIZED}'")
 
 if [[ -n "$DCONF_HITS" ]]; then
     warn "[dconf]     $DCONF_HITS"

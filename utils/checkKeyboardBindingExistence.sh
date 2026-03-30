@@ -111,3 +111,5 @@ else
     echo "────────────────────────────────────────────"
     warn "Conflict(s) found — see above."
 fi
+
+exit $FOUND

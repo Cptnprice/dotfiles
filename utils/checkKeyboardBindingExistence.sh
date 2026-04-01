@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+source "$(dirname "${BASH_SOURCE[0]}")/colors.sh"
+
 if [[ -z "$1" ]]; then
     echo "Usage: $0 <shortcut>"
     echo "Examples:"
@@ -44,14 +46,6 @@ normalize() {
 NORMALIZED=$(normalize "$1")
 echo "Checking: $1  →  normalized: $NORMALIZED"
 echo "────────────────────────────────────────────"
-
-YELLOW='\033[0;33m'
-GREEN='\033[0;32m'
-NC='\033[0m'
-
-# loggers
-warn() { echo -e "${YELLOW}$*${NC}"; }
-ok()   { echo -e "${GREEN}$*${NC}"; }
 
 FOUND=0
 

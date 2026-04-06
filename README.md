@@ -1,0 +1,7 @@
+# Dotfiles
+
+## Prerequisites
+
+**Packages**
+
+- make

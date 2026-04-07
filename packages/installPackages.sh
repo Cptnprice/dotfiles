@@ -6,6 +6,7 @@ PACKAGES=(
     git
     curl
     tmux
+    fzf
 )
 
 for package in "${PACKAGES[@]}"; do

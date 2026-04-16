@@ -2,7 +2,7 @@ SHELL := /bin/bash
 BOLD  := $(shell tput bold)
 RESET := $(shell tput sgr0)
 
-setup: install-packages setup-zsh setup-zsh-config setup-keyboard-bindings setup-git-config setup-git-aliases setup-fzf
+setup: install-packages setup-zsh setup-keyboard-bindings config-zsh config-git config-git-aliases config-fzf
 
 install-packages:
 	@echo "$(BOLD)Installing packages...$(RESET)"
@@ -12,22 +12,22 @@ setup-zsh:
 	@echo "$(BOLD)Setting up zsh...$(RESET)"
 	@bash shell/zsh/setupZsh.sh
 
-setup-zsh-config:
-	@echo "$(BOLD)Configuring zsh...$(RESET)"
-	@bash configuration/zsh/config.sh
-
 setup-keyboard-bindings:
 	@echo "$(BOLD)Setting up keyboard bindings...$(RESET)"
 	@bash keyboard-shortcuts/setCustomShortcuts.sh
 
-setup-git-config:
+config-zsh:
+	@echo "$(BOLD)Configuring zsh...$(RESET)"
+	@bash configuration/zsh/config.sh
+
+config-git:
 	@echo "$(BOLD)Configuring git...$(RESET)"
 	@bash configuration/git/config.sh
 
-setup-git-aliases:
-	@echo "$(BOLD)Setting up git aliases...$(RESET)"
+config-git-aliases:
+	@echo "$(BOLD)Configuring git aliases...$(RESET)"
 	@bash configuration/git/aliases.sh
 
-setup-fzf:
-	@echo "$(BOLD)Setting up fzf...$(RESET)"
+config-fzf:
+	@echo "$(BOLD)Configuring fzf...$(RESET)"
 	@bash configuration/fzf/aliases.sh

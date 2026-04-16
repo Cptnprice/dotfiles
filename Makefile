@@ -2,7 +2,7 @@ SHELL := /bin/bash
 BOLD  := $(shell tput bold)
 RESET := $(shell tput sgr0)
 
-setup: install-packages setup-zsh setup-keyboard-bindings setup-git-config setup-git-aliases setup-fzf
+setup: install-packages setup-zsh setup-zsh-config setup-keyboard-bindings setup-git-config setup-git-aliases setup-fzf
 
 install-packages:
 	@echo "$(BOLD)Installing packages...$(RESET)"
@@ -11,6 +11,10 @@ install-packages:
 setup-zsh:
 	@echo "$(BOLD)Setting up zsh...$(RESET)"
 	@bash shell/zsh/setupZsh.sh
+
+setup-zsh-config:
+	@echo "$(BOLD)Configuring zsh...$(RESET)"
+	@bash configuration/zsh/config.sh
 
 setup-keyboard-bindings:
 	@echo "$(BOLD)Setting up keyboard bindings...$(RESET)"

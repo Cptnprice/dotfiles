@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$(dirname "${BASH_SOURCE[0]}")/../../utils/colors.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/../../utils/logging/logging.sh"
 
 # Install zsh and set as default
 

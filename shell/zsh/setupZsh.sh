@@ -5,7 +5,7 @@ source "$(dirname "${BASH_SOURCE[0]}")/../../utils/logging/logging.sh"
 # Install zsh and set as default
 
 if command -v zsh &>/dev/null; then
-    ok "zsh already installed — $(zsh --version)"
+    ok "zsh is already installed — $(zsh --version)"
 else
     ok "Installing zsh..."
     sudo apt update -qq && sudo apt install -y zsh
@@ -15,7 +15,7 @@ else
         exit 1
     fi
 
-    ok "zsh installed — $(zsh --version)"
+    ok "zsh has been installed — $(zsh --version)"
 fi
 
 ZSH_PATH="$(which zsh)"

@@ -20,4 +20,4 @@ for option in "${!OPTIONS[@]}"; do
     fi
 done
 
-ok "configured zsh."
+ok "zsh has been configured."

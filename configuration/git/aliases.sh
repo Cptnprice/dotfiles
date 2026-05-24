@@ -28,4 +28,4 @@ git config --global alias.lg "log --oneline"
 # Utility
 git config --global alias.aliases "config --get-regexp alias"
 
-ok "Git aliases configured."
+ok "Git aliases have been configured."

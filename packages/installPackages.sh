@@ -19,7 +19,7 @@ for package in "${PACKAGES[@]}"; do
     sudo apt install -y "$package"
 
     if dpkg -s "$package" &>/dev/null; then
-        ok "$package installed — $(dpkg -s "$package" | grep '^Version' | awk '{print $2}')"
+        ok "$package has been installed — $(dpkg -s "$package" | grep '^Version' | awk '{print $2}')"
     else
         error "Failed to install $package."
     fi

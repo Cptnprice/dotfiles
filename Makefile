@@ -14,7 +14,7 @@ setup-zsh:
 
 setup-keyboard-bindings:
 	@echo "$(BOLD)Setting up keyboard bindings...$(RESET)"
-	@bash keyboard-shortcuts/setCustomShortcuts.sh
+	@bash keyboard-shortcuts/setCustomBindings.sh
 
 config-zsh:
 	@echo "$(BOLD)Configuring zsh...$(RESET)"

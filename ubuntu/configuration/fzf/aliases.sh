@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$(dirname "${BASH_SOURCE[0]}")/../../utils/logging/logging.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/../../../utils/logging/logging.sh"
 
 ZSHRC="$HOME/.zshrc"
 BUILTIN_BINDINGS="source /usr/share/doc/fzf/examples/key-bindings.zsh"

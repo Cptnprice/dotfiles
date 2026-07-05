@@ -8,7 +8,7 @@ if command -v zsh &>/dev/null; then
     ok "zsh is already installed — $(zsh --version)"
 else
     ok "Installing zsh..."
-    sudo pacman -Sy --needed --noconfirm zsh
+    sudo pacman -S --needed --noconfirm zsh
 
     if ! command -v zsh &>/dev/null; then
         error "zsh installation failed."
@@ -41,10 +41,10 @@ else
     MISSING=1
 fi
 
-if command -v wget &>/dev/null; then
-    ok "wget — $(wget --version 2>&1 | head -1)"
+if command -v curl &>/dev/null; then
+    ok "curl — $(curl --version 2>&1 | head -1)"
 else
-    error "wget is not installed."
+    error "curl is not installed."
     MISSING=1
 fi
 
@@ -61,4 +61,4 @@ if [[ $MISSING -eq 1 ]]; then
 fi
 
 ok "Installing oh-my-zsh..."
-sh -c "$(wget -O- https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"

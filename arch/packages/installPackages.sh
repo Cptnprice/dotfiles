@@ -9,8 +9,11 @@ PACKAGES=(
     fzf
 )
 
+ok "Refreshing package databases..."
+sudo pacman -Syu --noconfirm
+
 for package in "${PACKAGES[@]}"; do
-    if pacman -Qi "$package" &>/dev/null; then
+    if pacman -Q "$package" &>/dev/null; then
         ok "$package is already installed — $(pacman -Q "$package" | awk '{print $2}')"
         continue
     fi
@@ -18,7 +21,7 @@ for package in "${PACKAGES[@]}"; do
     ok "Installing $package..."
     sudo pacman -S --needed --noconfirm "$package"
 
-    if pacman -Qi "$package" &>/dev/null; then
+    if pacman -Q "$package" &>/dev/null; then
         ok "$package has been installed — $(pacman -Q "$package" | awk '{print $2}')"
     else
         error "Failed to install $package."

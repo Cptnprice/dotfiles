@@ -1,16 +1,5 @@
 #!/usr/bin/env bash
 
-# Custom global keyboard shortcuts for KDE Plasma 6.
-#
-# Plasma 6 dropped khotkeys, so "run a command on a keypress" is modelled as an
-# application launcher: for each entry we drop a .desktop launcher into
-# ~/.local/share/applications and bind a global shortcut to it in
-# kglobalshortcutsrc, then reload kglobalaccel so the change takes effect.
-#
-# NOTE: KDE shortcut scripting is version-sensitive — validate on a real
-# Plasma 6 session. The kglobalshortcutsrc value format is:
-#   _launch=<activeShortcut>,<defaultShortcut>,<friendlyName>
-
 source "$(dirname "${BASH_SOURCE[0]}")/../../utils/logging/logging.sh"
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -19,7 +8,7 @@ CHECK_BINDING="$SCRIPT_DIR/checkBindingExistence.sh"
 APPS_DIR="$HOME/.local/share/applications"
 SHORTCUTS_FILE="kglobalshortcutsrc"
 
-# name|command|binding  (KDE shortcut syntax, e.g. Meta+B)
+# name|command|binding
 SHORTCUTS=(
     "Firefox|firefox|Meta+B"
     "File Manager|dolphin|Meta+E"

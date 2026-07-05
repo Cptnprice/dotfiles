@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
-# Check whether a shortcut is already bound in KDE Plasma's global shortcuts.
-# Exit 0 = free, exit 1 = conflict (mirrors the GNOME checker's contract).
+# Exit 0 = free, exit 1 = conflict.
 
 source "$(dirname "${BASH_SOURCE[0]}")/../../utils/logging/logging.sh"
 

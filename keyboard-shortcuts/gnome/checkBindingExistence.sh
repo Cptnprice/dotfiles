@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-source "$(dirname "${BASH_SOURCE[0]}")/logging/logging.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/../../utils/logging/logging.sh"
 
 if [[ -z "$1" ]]; then
     echo "Usage: $0 <shortcut>"

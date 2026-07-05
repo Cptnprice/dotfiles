@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 
-source "$(dirname "${BASH_SOURCE[0]}")/../../utils/logging/logging.sh"
+source "$(dirname "${BASH_SOURCE[0]}")/../../../utils/logging/logging.sh"
 
 ZSHRC="$HOME/.zshrc"
-BUILTIN_BINDINGS="source /usr/share/doc/fzf/examples/key-bindings.zsh"
+BUILTIN_BINDINGS="source /usr/share/fzf/key-bindings.zsh"
 CUSTOM_FUNCTIONS="source $(realpath "$(dirname "${BASH_SOURCE[0]}")/custom-functions.sh")"
 
 # built-in fzf bindings

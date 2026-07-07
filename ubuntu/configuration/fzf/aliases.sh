@@ -7,7 +7,7 @@ BUILTIN_BINDINGS="source /usr/share/doc/fzf/examples/key-bindings.zsh"
 CUSTOM_FUNCTIONS="source $(realpath "$(dirname "${BASH_SOURCE[0]}")/custom-functions.sh")"
 
 # built-in fzf bindings
-if grep -qF "$BUILTIN_BINDINGS" "$ZSHRC"; then
+if grep -qsF "$BUILTIN_BINDINGS" "$ZSHRC"; then
     ok "fzf built-in bindings already in .zshrc."
 else
     echo "$BUILTIN_BINDINGS" >> "$ZSHRC"
@@ -15,7 +15,7 @@ else
 fi
 
 # custom fzf functions
-if grep -qF "$CUSTOM_FUNCTIONS" "$ZSHRC"; then
+if grep -qsF "$CUSTOM_FUNCTIONS" "$ZSHRC"; then
     ok "fzf custom functions already in .zshrc."
 else
     echo "$CUSTOM_FUNCTIONS" >> "$ZSHRC"

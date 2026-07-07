@@ -9,6 +9,9 @@ PACKAGES=(
     fzf
 )
 
+ok "Refreshing package lists..."
+sudo apt update -qq
+
 for package in "${PACKAGES[@]}"; do
     if dpkg -s "$package" &>/dev/null; then
         ok "$package is already installed — $(dpkg -s "$package" | grep '^Version' | awk '{print $2}')"

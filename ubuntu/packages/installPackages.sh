@@ -10,7 +10,9 @@ PACKAGES=(
 )
 
 ok "Refreshing package lists..."
-sudo apt update -qq
+if ! sudo apt update -qq; then
+    warn "Could not refresh package lists (missing sudo credentials?) — continuing with existing cache."
+fi
 
 for package in "${PACKAGES[@]}"; do
     if dpkg -s "$package" &>/dev/null; then

@@ -10,7 +10,9 @@ PACKAGES=(
 )
 
 ok "Refreshing package databases..."
-sudo pacman -Syu --noconfirm
+if ! sudo pacman -Syu --noconfirm; then
+    warn "Could not refresh/upgrade package databases (missing sudo credentials?) — continuing with existing state."
+fi
 
 for package in "${PACKAGES[@]}"; do
     if pacman -Q "$package" &>/dev/null; then

@@ -10,7 +10,9 @@ PACKAGES=(
 )
 
 ok "Refreshing package metadata..."
-sudo dnf makecache -q
+if ! sudo dnf makecache -q; then
+    warn "Could not refresh package metadata (missing sudo credentials?) — continuing with existing cache."
+fi
 
 for package in "${PACKAGES[@]}"; do
     if rpm -q "$package" &>/dev/null; then

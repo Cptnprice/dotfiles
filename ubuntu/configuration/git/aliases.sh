@@ -2,6 +2,11 @@
 
 source "$(dirname "${BASH_SOURCE[0]}")/../../../utils/logging/logging.sh"
 
+if ! command -v git &>/dev/null; then
+    warn "git is not installed — skipping git alias configuration. Run the package install step first."
+    exit 0
+fi
+
 ok "Configuring git aliases..."
 
 # Staging

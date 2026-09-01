@@ -7,6 +7,7 @@ PACKAGES=(
     curl
     tmux
     fzf
+    nano
 )
 
 ok "Refreshing package databases..."

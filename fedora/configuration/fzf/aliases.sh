@@ -21,6 +21,9 @@ fi
 # custom fzf functions
 if grep -qsF "$CUSTOM_FUNCTIONS" "$ZSHRC"; then
     ok "fzf custom functions already in .zshrc."
+elif grep -qs "^source .*/custom-functions\.sh$" "$ZSHRC"; then
+    sed -i "s|^source .*/custom-functions\.sh$|$CUSTOM_FUNCTIONS|" "$ZSHRC"
+    ok "fzf custom functions path updated in .zshrc."
 else
     echo "$CUSTOM_FUNCTIONS" >> "$ZSHRC"
     ok "fzf custom functions added to .zshrc."

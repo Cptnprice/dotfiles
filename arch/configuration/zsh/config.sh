@@ -12,7 +12,7 @@ declare -A OPTIONS=(
 )
 
 for option in "${!OPTIONS[@]}"; do
-    if grep -qsF "setopt $option" "$ZSHRC"; then
+    if grep -qsxF "setopt $option" "$ZSHRC"; then
         ok "$option already set."
     else
         echo "setopt $option" >> "$ZSHRC"

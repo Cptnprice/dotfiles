@@ -11,7 +11,7 @@ if [[ ! -f /usr/share/fzf/shell/key-bindings.zsh ]]; then
 fi
 
 # built-in fzf bindings
-if grep -qsF "$BUILTIN_BINDINGS" "$ZSHRC"; then
+if grep -qsxF "$BUILTIN_BINDINGS" "$ZSHRC"; then
     ok "fzf built-in bindings already in .zshrc."
 else
     echo "$BUILTIN_BINDINGS" >> "$ZSHRC"
@@ -19,7 +19,7 @@ else
 fi
 
 # custom fzf functions
-if grep -qsF "$CUSTOM_FUNCTIONS" "$ZSHRC"; then
+if grep -qsxF "$CUSTOM_FUNCTIONS" "$ZSHRC"; then
     ok "fzf custom functions already in .zshrc."
 elif grep -qs "^source .*/custom-functions\.sh$" "$ZSHRC"; then
     sed -i "s|^source .*/custom-functions\.sh$|$CUSTOM_FUNCTIONS|" "$ZSHRC"

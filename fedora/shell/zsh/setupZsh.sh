@@ -19,7 +19,7 @@ else
 fi
 
 if [[ $ZSH_READY -eq 1 ]]; then
-    ZSH_PATH="$(which zsh)"
+    ZSH_PATH="$(command -v zsh)"
 
     if [[ "$SHELL" == "$ZSH_PATH" ]]; then
         ok "zsh is already the default shell."
@@ -34,7 +34,7 @@ if [[ $ZSH_READY -eq 1 ]]; then
 
     # Install 'oh-my-zsh' framework
 
-    if [[ -d "$HOME/.oh-my-zsh" ]]; then
+    if [[ -f "$HOME/.oh-my-zsh/oh-my-zsh.sh" ]]; then
         ok "oh-my-zsh is already installed."
     else
         ok "Checking oh-my-zsh prerequisites..."
@@ -67,7 +67,9 @@ if [[ $ZSH_READY -eq 1 ]]; then
         else
             ok "Installing oh-my-zsh..."
             INSTALL_SCRIPT="$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-            if [[ -n "$INSTALL_SCRIPT" ]] && sh -c "$INSTALL_SCRIPT"; then
+            CURL_STATUS=$?
+
+            if [[ $CURL_STATUS -eq 0 && -n "$INSTALL_SCRIPT" ]] && sh -c "$INSTALL_SCRIPT"; then
                 ok "oh-my-zsh has been installed."
             else
                 warn "oh-my-zsh installation failed (network issue, or git set up to use SSH for GitHub with no SSH/GitHub credentials configured on this machine) — skipping. Re-run this step later once credentials/connectivity are set up."

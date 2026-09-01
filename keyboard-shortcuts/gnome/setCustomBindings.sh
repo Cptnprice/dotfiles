@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 
+source "$(dirname "${BASH_SOURCE[0]}")/../../utils/logging/logging.sh"
+
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 CHECK_BINDING="$SCRIPT_DIR/checkBindingExistence.sh"
+
+SCHEMA="org.gnome.settings-daemon.plugins.media-keys"
+CUSTOM_BASE="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings"
 
 SHORTCUTS=(
     "Firefox|firefox|<Super>b"
@@ -9,34 +14,55 @@ SHORTCUTS=(
 )
 
 set_shortcuts() {
-    local index=0
+    local existing_str
+    existing_str=$(gsettings get "$SCHEMA" custom-keybindings 2>/dev/null | tr -d "[]'" | tr ',' '\n' | xargs)
+    local existing_paths=()
+
+    for path in $existing_str; do
+        [[ -n "$path" ]] && existing_paths+=("$path")
+    done
+
+    local next_index=0
+    for path in "${existing_paths[@]}"; do
+        if [[ "$path" =~ custom([0-9]+)/?$ ]]; then
+            local n="${BASH_REMATCH[1]}"
+            (( n >= next_index )) && next_index=$((n + 1))
+        fi
+    done
+
     local paths=()
 
     for shortcut in "${SHORTCUTS[@]}"; do
         IFS='|' read -r name command binding <<< "$shortcut"
 
         if ! bash "$CHECK_BINDING" "$binding" &>/dev/null; then
-            echo "Skipping '$name' ($binding) — already in use"
-            ((index++))
+            warn "Skipping '$name' ($binding) — already in use"
             continue
         fi
 
-        local path="/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${index}/"
+        local path="${CUSTOM_BASE}/custom${next_index}/"
+        ((next_index++))
         paths+=("'$path'")
 
-        gsettings set "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$path" name    "$name"
-        gsettings set "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$path" command "$command"
-        gsettings set "org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:$path" binding "$binding"
+        gsettings set "${SCHEMA}.custom-keybinding:$path" name    "$name"
+        gsettings set "${SCHEMA}.custom-keybinding:$path" command "$command"
+        gsettings set "${SCHEMA}.custom-keybinding:$path" binding "$binding"
 
-        echo "Set '$name' → $binding"
-        ((index++))
+        ok "Set '$name' → $binding"
     done
 
-    if [[ ${#paths[@]} -gt 0 ]]; then
-        local joined
-        joined=$(IFS=', '; echo "${paths[*]}")
-        gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "[${joined}]"
-    fi
+    for existing in "${existing_paths[@]}"; do
+        local keep="'$existing'"
+        local already_included=0
+        for p in "${paths[@]}"; do
+            [[ "$p" == "$keep" ]] && already_included=1 && break
+        done
+        [[ $already_included -eq 0 ]] && paths+=("$keep")
+    done
+
+    local joined
+    joined=$(IFS=', '; echo "${paths[*]}")
+    gsettings set "$SCHEMA" custom-keybindings "[${joined}]"
 }
 
 set_shortcuts

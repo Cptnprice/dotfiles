@@ -33,7 +33,10 @@ set_shortcuts() {
     local paths=()
 
     for shortcut in "${SHORTCUTS[@]}"; do
-        IFS='|' read -r name command binding <<< "$shortcut"
+        local name="${shortcut%%|*}"
+        local binding="${shortcut##*|}"
+        local command="${shortcut#*|}"
+        command="${command%|*}"
 
         if ! bash "$CHECK_BINDING" "$binding" &>/dev/null; then
             warn "Skipping '$name' ($binding) — already in use"

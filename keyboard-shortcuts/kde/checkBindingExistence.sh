@@ -11,7 +11,10 @@ if [[ -z "$1" ]]; then
 fi
 
 BINDING="$1"
-SHORTCUTS_FILE="$HOME/.config/kglobalshortcutsrc"
+# kwriteconfig6 (in setCustomBindings.sh) resolves a bare filename via
+# KConfig/QStandardPaths, which honors $XDG_CONFIG_HOME when set. Match
+# that here so the two scripts agree on which file is authoritative.
+SHORTCUTS_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/kglobalshortcutsrc"
 
 echo "Checking: $BINDING"
 echo "────────────────────────────────────────────"

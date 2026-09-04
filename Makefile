@@ -5,7 +5,7 @@ RESET := $(shell tput sgr0)
 .PHONY: setup-ubuntu install-packages-ubuntu setup-zsh-ubuntu config-zsh-ubuntu config-git-ubuntu config-git-aliases-ubuntu config-fzf-ubuntu \
         setup-arch install-packages-arch setup-zsh-arch config-zsh-arch config-git-arch config-git-aliases-arch config-fzf-arch \
         setup-fedora install-packages-fedora setup-zsh-fedora config-zsh-fedora config-git-fedora config-git-aliases-fedora config-fzf-fedora \
-        keybindings-gnome keybindings-kde
+        keybindings-gnome keybindings-kde apps
 
 # ── Ubuntu ──────────────────────────────────────────────────────────
 
@@ -100,3 +100,9 @@ keybindings-gnome:
 keybindings-kde:
 	@echo "$(BOLD)Setting up KDE keyboard bindings...$(RESET)"
 	@bash keyboard-shortcuts/kde/setCustomBindings.sh
+
+# ── Apps (distro-independent, opt-in) ──────────────────────────────
+
+apps:
+	@echo "$(BOLD)Installing apps...$(RESET)"
+	@bash apps/installApps.sh

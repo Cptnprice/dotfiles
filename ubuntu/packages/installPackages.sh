@@ -8,6 +8,8 @@ PACKAGES=(
     tmux
     fzf
     nano
+    vim
+    firefox
 )
 
 ok "Refreshing package lists..."
